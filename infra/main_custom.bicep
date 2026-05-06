@@ -1322,7 +1322,7 @@ module avmCosmosDB 'br/public:avm/res/document-db/database-account:0.19.0' = {
     location: location
     mongodbDatabases: [
       {
-        name: 'default'
+        name: 'ContentProcess'
         tag: 'default database'
       }
     ]
