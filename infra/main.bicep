@@ -1299,7 +1299,7 @@ module avmCosmosDB 'br/public:avm/res/document-db/database-account:0.19.0' = {
     location: location
     mongodbDatabases: [
       {
-        name: 'ContentProcess'
+        name: 'cosmon-ContentProcess'
         tag: 'default database'
       }
     ]
@@ -1420,7 +1420,7 @@ module avmAppConfig 'br/public:avm/res/app-configuration/configuration-store:0.9
       }
       {
         name: 'APP_COSMOS_DATABASE'
-        value: 'ContentProcess'
+        value: 'cosmon-ContentProcess'
       }
       {
         name: 'APP_CPS_CONFIGURATION'
