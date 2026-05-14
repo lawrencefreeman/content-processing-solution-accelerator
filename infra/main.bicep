@@ -706,7 +706,7 @@ module avmStorageAccount 'br/public:avm/res/storage/storage-account:0.32.0' = {
 module avmAiServices 'modules/account/aifoundry.bicep' = {
   name: take('module.ai-services.${solutionSuffix}', 64)
   params: {
-    name: 'aif-${solutionSuffix}'
+    name: 'cog-${solutionSuffix}'
     projectName: 'proj-${solutionSuffix}'
     projectDescription: 'proj-${solutionSuffix}'
     existingFoundryProjectResourceId: existingProjectResourceId
@@ -719,7 +719,7 @@ module avmAiServices 'modules/account/aifoundry.bicep' = {
       app: solutionSuffix
       location: azureAiServiceLocation
     }
-    customSubDomainName: 'aif-${solutionSuffix}'
+    customSubDomainName: 'cog-${solutionSuffix}'
     diagnosticSettings: enableMonitoring ? [{ workspaceResourceId: logAnalyticsWorkspace!.outputs.resourceId }] : null
     roleAssignments: [
       {
