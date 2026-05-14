@@ -179,3 +179,38 @@ Use these as quick reference guides to unblock your deployments.
 
 💡 Note: If you encounter any other issues, you can refer to the [Common Deployment Errors](https://learn.microsoft.com/en-us/azure/azure-resource-manager/troubleshooting/common-deployment-errors) documentation.
 If the problem persists, you can also raise a bug in our [Content Processing Github Issues](https://github.com/microsoft/content-processing-solution-accelerator/issues) for further support.
+
+---------------------------------
+
+## GBRx Technical Architecture Requirements
+
+> These requirements are specific to the **GBRx (Network Rail)** deployment of this solution accelerator. They reflect org-level Azure Policy constraints enforced via the `Landingzone-Naming` policy assignment at the `landingzones` Management Group scope.
+
+### Resource Naming Convention
+
+All Azure resources must comply with the `Enforce resource naming convention` policy (`Resource-Naming-Convention` definition, managed by `networkrail` management group). The following prefixes are required:
+
+| Resource Type | Required Prefix | Example |
+|---|---|---|
+| `Microsoft.CognitiveServices/accounts` | `cog-*` | `cog-gbrxaiiarq4zo` |
+| `Microsoft.ContainerRegistry/registries` | `acr*` | `acrgbrxaiiarq4zo` |
+| `Microsoft.DocumentDB/databaseAccounts/mongodbDatabases` | `cosmon-*` | `cosmon-ContentProcess` |
+
+> **Note:** `Microsoft.Resources/tags` resources are always named `default` by the ARM API — this cannot be changed. A policy exemption is required for this resource type.
+
+### PIM Role Requirements
+
+Activate the following roles via PIM before running `azd provision`:
+
+| Role | Scope | Required For |
+|---|---|---|
+| Contributor | Subscription | Creating and managing all Azure resources |
+| Role Based Access Control Administrator | Subscription | Writing `Microsoft.Authorization/roleAssignments` during deployment |
+
+### Known Policy Blockers (Requiring Admin Exemption)
+
+| Resource | Policy | Reason Exemption Needed |
+|---|---|---|
+| `Microsoft.Resources/tags` (name: `default`) | Naming convention | ARM API enforces this name — non-configurable |
+| `Microsoft.Authorization/roleAssignments` — Owner role on `Microsoft.CognitiveServices/accounts` | RBAC Admin condition excludes Owner assignment | Bicep assigns Owner to managed identity on AI Foundry resource. Owner is blocked by the RBAC Admin PIM condition. **Fixed in Bicep**: replaced with `Azure AI Developer` (`infra/main.bicep:727`, `infra/main_custom.bicep:730`) |
+

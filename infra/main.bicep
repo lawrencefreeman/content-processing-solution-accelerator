@@ -585,7 +585,7 @@ module avmManagedIdentity './modules/managed-identity.bicep' = {
 module avmContainerRegistry 'modules/container-registry.bicep' = {
   name: take('module.container-registry.${solutionSuffix}', 64)
   params: {
-    acrName: 'cr${replace(solutionSuffix, '-', '')}'
+    acrName: 'acr${replace(solutionSuffix, '-', '')}'
     location: location
     acrSku: enableRedundancy || enablePrivateNetworking ? 'Premium' : 'Standard'
     publicNetworkAccess: enablePrivateNetworking ? 'Disabled' : 'Enabled'
@@ -724,7 +724,7 @@ module avmAiServices 'modules/account/aifoundry.bicep' = {
     roleAssignments: [
       {
         principalId: avmManagedIdentity.outputs.principalId
-        roleDefinitionIdOrName: '8e3af657-a8ff-443c-a75c-2fe8c4bcb635' // Owner role
+        roleDefinitionIdOrName: 'Azure AI Developer' // Replaced Owner — Owner blocked by RBAC Admin condition; Azure AI Developer sufficient for project management
         principalType: 'ServicePrincipal'
       }
       {
@@ -820,7 +820,7 @@ module avmAiServices_cu 'br/public:avm/res/cognitive-services/account:0.14.2' = 
   name: take('avm.res.cognitive-services.account.content-understanding.${solutionSuffix}', 64)
 
   params: {
-    name: 'aicu-${solutionSuffix}'
+    name: 'cog-cu-${solutionSuffix}'
     location: contentUnderstandingLocation
     sku: 'S0'
     managedIdentities: {
@@ -834,7 +834,7 @@ module avmAiServices_cu 'br/public:avm/res/cognitive-services/account:0.14.2' = 
       app: solutionSuffix
       location: location
     }
-    customSubDomainName: 'aicu-${solutionSuffix}'
+    customSubDomainName: 'cog-cu-${solutionSuffix}'
     disableLocalAuth: true
     enableTelemetry: enableTelemetry
     networkAcls: {
