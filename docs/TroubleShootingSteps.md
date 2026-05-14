@@ -195,6 +195,7 @@ All Azure resources must comply with the `Enforce resource naming convention` po
 | `Microsoft.CognitiveServices/accounts` | `cog-*` | `cog-gbrxaiiarq4zo` |
 | `Microsoft.ContainerRegistry/registries` | `acr*` | `acrgbrxaiiarq4zo` |
 | `Microsoft.DocumentDB/databaseAccounts/mongodbDatabases` | `cosmon-*` | `cosmon-ContentProcess` |
+| `Microsoft.AppConfiguration/configurationStores` | `appcg-*` | `appcg-gbrxaiiarq4zo` |
 
 > **Note:** `Microsoft.Resources/tags` resources are always named `default` by the ARM API — this cannot be changed. A policy exemption is required for this resource type.
 

@@ -1350,7 +1350,7 @@ module avmCosmosDB 'br/public:avm/res/document-db/database-account:0.19.0' = {
 module avmAppConfig 'br/public:avm/res/app-configuration/configuration-store:0.9.2' = {
   name: take('avm.res.app.configuration-store.${solutionSuffix}', 64)
   params: {
-    name: 'appcs-${solutionSuffix}'
+    name: 'appcg-${solutionSuffix}'
     location: location
     enablePurgeProtection: enablePurgeProtection
     tags: {
@@ -1575,7 +1575,7 @@ module avmAppConfig 'br/public:avm/res/app-configuration/configuration-store:0.9
 module avmAppConfig_update 'br/public:avm/res/app-configuration/configuration-store:0.9.2' = if (enablePrivateNetworking) {
   name: take('avm.res.app.configuration-store.update.${solutionSuffix}', 64)
   params: {
-    name: 'appcs-${solutionSuffix}'
+    name: 'appcg-${solutionSuffix}'
     location: location
     enablePurgeProtection: enablePurgeProtection
     enableTelemetry: enableTelemetry
